@@ -1,5 +1,6 @@
 body {
-    color: white;
+    background-color: rgb(22, 21, 21);
+    color: rgb(248, 236, 220);
 }
 
 img {
@@ -7,12 +8,13 @@ img {
     margin-bottom: 20px;
 }
 
-/* Style below comes from Nathan Cahill: 
+/* Style below adapted from Nathan Cahill: 
    URL: https://github.com/nathancahill/skeleton-fontawesome-buttons
 */
 .button-icon {
     width: 38px;
     padding: 0;
+    margin-right: 5px;
 }
 
 .button-icon .fa {
