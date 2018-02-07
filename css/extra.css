@@ -76,7 +76,7 @@ td .button-icon .fa {
 /* End skeleton-fontawesome-buttons */
 
 .fa, .fab {
-    color: white;
+    color: rgb(248, 236, 220);
     -o-transition:.25s;
     -ms-transition:.25s;
     -moz-transition:.25s;
