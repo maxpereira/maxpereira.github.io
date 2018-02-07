@@ -8,6 +8,26 @@ img {
     margin-bottom: 20px;
 }
 
+a:link {
+    color: rgb(248, 236, 220);
+}
+
+a:visited {
+    color: rgb(248, 236, 220);
+}
+
+a:hover {
+    color: rgb(250, 247, 244);
+}
+
+a:active {
+    color: rgb(185, 185, 236);
+}
+
+h2 {
+    text-shadow: 0 0 7px rgb(185, 185, 236);
+}
+
 /* Style below adapted from Nathan Cahill: 
    URL: https://github.com/nathancahill/skeleton-fontawesome-buttons
 */
