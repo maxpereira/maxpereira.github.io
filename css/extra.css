@@ -3,7 +3,7 @@ body {
     color: rgb(248, 236, 220);
 }
 
-img {
+.logo {
     border-radius: 50%;
     margin-bottom: 20px;
 }
@@ -37,6 +37,16 @@ h2 {
     margin-right: 5px;
 }
 
+.fa:hover {
+    color: rgb(250, 247, 244);
+    text-shadow: 0 0 5px rgb(185, 185, 236);
+}
+
+.fab:hover {
+    color: rgb(250, 247, 244);
+    text-shadow: 0 0 5px rgb(185, 185, 236);
+}
+
 .button-icon .fa {
     width: 38px;
     line-height: 38px;
@@ -67,4 +77,37 @@ td .button-icon .fa {
 
 .fa, .fab {
     color: white;
-  }
+    -o-transition:.25s;
+    -ms-transition:.25s;
+    -moz-transition:.25s;
+    -webkit-transition:.25s;
+    transition:.25s;
+}
+
+/* Email tooltip */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 250px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 0px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+
+    bottom: 120%;
+    left: 50%;
+    margin-left: -125px; /* Use half of the width (120/2 = 60), to center the tooltip */
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
