@@ -39,12 +39,12 @@ h2 {
 
 .fa:hover {
     color: rgb(250, 247, 244);
-    text-shadow: 0 0 5px rgb(185, 185, 236);
+    text-shadow: 0 0 3px rgb(185, 185, 236);
 }
 
 .fab:hover {
     color: rgb(250, 247, 244);
-    text-shadow: 0 0 5px rgb(185, 185, 236);
+    text-shadow: 0 0 3px rgb(185, 185, 236);
 }
 
 .button-icon .fa {
