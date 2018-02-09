@@ -107,8 +107,3 @@ td .button-icon .fa {
     position: relative;
     display: inline-block;
 }
-
-.button-icon:hover .tooltiptext {
-    opacity: 1;
-    transition:opacity 0.25s linear;
-}

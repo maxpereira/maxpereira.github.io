@@ -2,6 +2,20 @@
 <html lang="en">
 <head>
 
+  <script type="text/javascript">
+  var toggle = 0;
+  function popModal(){
+    var elem = document.getElementById("emailButton");
+    if (toggle == 0) {
+      elem.setAttribute("style","opacity: 1;")
+      toggle = 1;
+    } else {
+      elem.setAttribute("style","opacity: 0;")
+      toggle = 0;
+    }
+  }
+  </script>
+
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
@@ -41,9 +55,9 @@
         <p>I'm a first-year Computer Science Student at <a href="https://ucsc.edu" target="_blank">UC Santa Cruz.</a><br>Let's connect.</p>
         <!-- Email Button -->
         <div class="tooltip">
-        <a class="button button-icon">
+        <a class="button button-icon" onclick="popModal();">
             <i class="fa fa-envelope"></i>
-            <span class="tooltiptext"><image src="images/hello.png"></span>
+            <span class="tooltiptext" id="emailButton"><image src="images/hello.png"></span>
         </a>
         </div>
         <!-- LinkedIn Button -->
