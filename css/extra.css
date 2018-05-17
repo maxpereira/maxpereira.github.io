@@ -17,7 +17,7 @@ a:visited {
 }
 
 a:hover {
-    color: rgb(250, 247, 244);
+    color: mediumaquamarine;
 }
 
 a:active {
@@ -26,6 +26,14 @@ a:active {
 
 h2 {
     text-shadow: 0 0 7px rgb(185, 185, 236);
+}
+
+#projects a:link, #projects {
+    color: #666
+}
+
+#projects a:hover {
+    color: #ccc;
 }
 
 /* Style below adapted from Nathan Cahill: 
