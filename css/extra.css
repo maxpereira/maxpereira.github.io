@@ -6,6 +6,7 @@ body {
 .logo {
     border-radius: 50%;
     margin-bottom: 20px;
+    box-shadow: 0 0 1000px rgb(185, 185, 236);
 }
 
 a:link {
@@ -26,6 +27,16 @@ a:active {
 
 h2 {
     text-shadow: 0 0 7px rgb(185, 185, 236);
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+#projects {
+    padding-bottom: 5px;
 }
 
 #projects a:link, #projects {
