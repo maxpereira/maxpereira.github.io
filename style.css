@@ -2,3 +2,6 @@ body { font-family: Sans-Serif; }
 p { margin-top: 7px; margin-bottom: 7px; }
 li { margin-top: 5px; margin-bottom: 5px; }
 h3,h2,h1,ul { margin-top: 10px; margin-bottom: 15px; }
+a:link,a:visited { color: blue; }
+a:hover { color: #f7056a; }
+a:active { color: turquoise; }
