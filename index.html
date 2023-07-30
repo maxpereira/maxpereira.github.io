@@ -2,6 +2,7 @@
 <head>
 	<title>Max Pereira</title>
 	<link rel="icon" type="image/png" href="favicon.png">
+	<link rel="stylesheet" href="style.css">
 	<script type="text/javascript">
 		function toggleVis(elem) {
 			if (document.getElementById(elem).style.display == 'none') {
@@ -11,13 +12,9 @@
 			}
 		}
 	</script>
-	<style>
-		p { margin-top: 7px; margin-bottom: 7px; }
-		h3,h2,h1,ul { margin-top: 10px; margin-bottom: 15px; }
-	</style>
 </head>
 <body>
-	<img src="informatics.png" align="right" width="94" height="94" alt="Icon of a computer screen showing a graph structure">
+	<img src="informatics.png" align="right" width="94" height="94" alt="Icon of a computer screen showing a graph structure" title="Source: MindWorlds on Flaticon">
 	<h1>Max Pereira</h1>
 	<h2>Informatics Professional</h2>
 	<hr>
@@ -68,7 +65,7 @@
 	<p>2017—2021</p>
 	<hr>
 	<h3>Homelab</h3>
-	<p>Proxmox hypervisor running several Virtual Machines to offer various self hosted services. Virtual machines orchestrated with Terraform and configured with Ansible. Most services are running as Docker containers except OpenVPN which is running on a dedicated VM.</p>
+	<p>Proxmox hypervisor running several Virtual Machines to offer various self hosted services. Virtual machines orchestrated with Terraform and configured with Ansible. Most services are running as Docker containers except OpenVPN which is running on a dedicated virtual machine.</p>
 	<table border="1">
 	  <tr>
 	    <th>Service</th>
@@ -106,6 +103,10 @@
 	    <td>nginx</td>
 	    <td>Static content hosting</td>
 	  </tr>
+	  <tr>
+	    <td>Portainer</td>
+	    <td>Web-based Docker container management</td>
+	  </tr>	  
 	  <tr>
 	    <td>Snapdrop</td>
 	    <td>Easy file sharing between network devices</td>
