@@ -11,3 +11,14 @@ a:active { color: turquoise; }
 #hello { font-weight: bold; font-size: 30px; }
 #name { font-weight: bold; font-size: 36px; }
 #subheading { font-weight: bold; font-size: 24px; }
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+        color: #FAF9F6;
+    }
+    a:link,a:visited { color: rgb(111, 111, 238); }
+    a:hover { color: #f7056a; }
+    a:active { color: turquoise; }
+    #infmIcon { filter: invert(1); }
+}
