@@ -11,6 +11,7 @@ a:active { color: turquoise; }
 #hello { font-weight: bold; font-size: 30px; }
 #name { font-weight: bold; font-size: 36px; }
 #subheading { font-weight: bold; font-size: 24px; }
+#mePhoto { padding-right: 5px; border-radius: 10px; }
 
 @media (prefers-color-scheme: dark) {
     body {
