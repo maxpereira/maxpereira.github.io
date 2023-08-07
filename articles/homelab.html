@@ -1,0 +1,113 @@
+<html>
+<head>
+	<title>Homelab | Max Pereira</title>
+	<link rel="icon" type="image/png" href="../favicon.png">
+	<link rel="stylesheet" href="../style.css">
+	<script type="text/javascript" src="../common.js"></script>
+</head>
+<body>
+	<center>
+		<div id="bigbox">
+			<div id="content">
+				<img src="../informatics.png" id="infmIcon" align="right" width="76" height="76" alt="Icon of a computer screen showing a graph structure" title="Source: MindWorlds on Flaticon">
+				<font id="name">Max Pereira</font>
+				<font id="subheading"><p>Informatics Professional</p></font>
+				<hr>
+					<h3>What's a Homelab?</h3>
+					<p>Basically, a homelab (or home lab) is a smattering of enterprise (or not-so-enterprise) equipment interconnected in a home environment for experimentation with various technologies. Typically a homelab is tailored to one's particular interests, whether it be networking, cybersecurity, Windows domain administration, Linux, virtualization, containerization, etc. There is not one singular correct way to homelab. Depending on one's budget a homelab can consist of the same rack-mounted equipment you'd find in a large company or it can consist of recycled computers from an e-waste bin sitting on an IKEA table. The flexibility of homelab is part of the great fun of it.</p>
+					<hr>
+					<h3>My Homelab</h3>
+					<p>I've been running a homelab in various forms since I was around 13. For the first iteration in my parents garage, I was running a Dell PowerEdge R710 server purchased off eBay kitted with dual Xeon processors and 196GB of RAM, which was both loud and power hungry (thanks Mom and Dad!). Now that I'm paying for my own power I'm running a mini PC as my main hypervisor which consumes less than 10 watts at idle and is near silent. With the advent of containerization I can run many services on this host (16 and counting) and still not even get close to maxing out the i7 or 24GB of RAM it has.</p>
+					<p>Below is a list of the services I'm running and technologies I'm learning. Recently I've been having fun learning DevOps focused technologies like Terraform and Ansible. I was able to find and modify a <a href="https://registry.terraform.io/providers/Telmate/proxmox/latest/docs">Terraform provider for Proxmox</a> which allows me to spin up new Ubuntu VMs and automatically configures them with an Ansible playbook.</p>
+					<table border="1">
+						<tr>
+							<th>Service</th>
+							<th>Description</th>
+						</tr>
+						<tr>
+							<td>Proxmox</td>
+							<td>Virtual Machine hypervisor</td>
+						</tr>
+						<tr>
+							<td>Ubuntu 22.04 LTS</td>
+							<td>Docker container host</td>
+						</tr>
+						<tr>
+							<td>Terraform</td>
+							<td>Virtual Machine orchestrator</td>
+						</tr>
+						<tr>
+							<td>Ansible</td>
+							<td>Virtual Machine configurator</td>
+						</tr>
+						<tr>
+							<td>Docker</td>
+							<td>Containerization</td>
+						</tr>
+						<tr>
+							<td>Pi-hole</td>
+							<td>Local DNS + DHCP server, adblocking</td>
+						</tr>
+						<tr>
+							<td>Home Assistant</td>
+							<td>Home automation</td>
+						</tr>
+						<tr>
+							<td>Node-RED</td>
+							<td>Home automation</td>
+						</tr>
+						<tr>
+							<td>OpenVPN</td>
+							<td>VPN server</td>
+						</tr>
+						<tr>
+							<td>nginx</td>
+							<td>Static content hosting</td>
+						</tr>
+						<tr>
+							<td>Portainer</td>
+							<td>Web-based Docker container management</td>
+						</tr>	  
+						<tr>
+							<td>Snapdrop</td>
+							<td>Easy file sharing between network devices</td>
+						</tr>
+						<tr>
+							<td>Vikunja</td>
+							<td>To-do list and reminders</td>
+						</tr>
+						<tr>
+							<td>Kanboard</td>
+							<td>Kanban boards</td>
+						</tr>
+						<tr>
+							<td>Grist</td>
+							<td>Spreadsheets</td>
+						</tr>
+						<tr>
+							<td>Bookstack</td>
+							<td>Wiki, knowledge management</td>
+						</tr>
+						</table>
+					<hr>
+					<h3>Homelab Resources</h3>
+					<p>A big part of the fun of running a homelab is participating in the community. In addition to being a great resource when you get stuck or to find something new to try in your lab, it's also just plain cool to see other peoples' builds. Below is a brief list of some good resources and content.</p>
+					<ul>
+						<li><a href="https://old.reddit.com/r/homelab">r/Homelab</a> - Probably the most active resource. See other lab builds and discuss homelab in general.</li>
+						<li><a href="https://old.reddit.com/r/homelab/wiki/index">r/Homelab Wiki</a> - Great resource for both introductory information and choosing equipment.</li>
+						<li><a href="https://old.reddit.com/r/selfhosted">r/selfhosted</a> - Find and discuss new services to host on your own infrastructure.</li>
+						<li><a href="https://old.reddit.com/r/homeassistant">r/homeassistant</a> - Home Assistant topics, mostly automations and integrations.</li>
+						<li><a href="https://www.youtube.com/@christianlempa">Christian Lempa (YouTube)</a> - General homelab channel.</li>
+						<li><a href="https://www.youtube.com/@camerongray1515">Cameron Gray (YouTube)</a> - More networking heavy content.</li>
+						<li><a href="https://www.youtube.com/@TechnoTim">Techno Tim (YouTube)</a> - General homelab channel.</li>
+						<li><a href="https://youtube.com/@JeffGeerling">Jeff Geerling (YouTube)</a> - "That Ansible and Raspberry Pi dude".</li>
+						<li><a href="https://www.youtube.com/@LAWRENCESYSTEMS">Lawrence Systems (YouTube)</a> - Also networking heavy. He owns his own business/MSP as well.</li>
+						<li><a href="https://www.youtube.com/c/MyPlayHouse">Morten Hjorth/My PlayHouse (YouTube)</a> - Probably the craziest homelab I've seen.</li>
+					</ul>
+				<hr>
+				<a href="/">← Back to Home</a>
+			</div>
+		</div>
+	</center>
+</body>
+</html>
