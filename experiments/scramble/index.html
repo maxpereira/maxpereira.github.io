@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title>Scramble</title>
+        <style>
+            #goBtn {
+                width: 320px;
+                height: 50px;
+                font-size: 24pt;
+            }
+
+            textarea {
+                width: 500px;
+                height: 200px;
+                font-size: 18pt;
+                font-family: sans-serif;
+            }
+
+            body {
+                color: white;
+                font-family: sans-serif;
+            }
+
+            a {
+                color: pink;
+            }
+
+        </style>
+        <script type="text/javascript">
+            // https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+            function shuffle(array) {
+                let currentIndex = array.length,  randomIndex;
+        
+                while (currentIndex != 0) {
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+                    [array[currentIndex], array[randomIndex]] = [
+                    array[randomIndex], array[currentIndex]];
+                }
+        
+                return array;
+            }
+        
+            function doScramble() {
+                inArray = document.getElementById("input").value.split(" ")
+        
+                var outArray = []
+        
+                for (var i=0; i<inArray.length; i++) {
+                    wordSplit = inArray[i].split("")
+                    var word = ""
+                    var midLetters = []
+        
+                    for (var x=0; x<=wordSplit.length; x++) {
+                        if (x==0) {
+                            word = word + wordSplit[x]
+                        } else if (x < wordSplit.length-1) {
+                            midLetters.push(wordSplit[x])
+                        } else if (x > wordSplit.length-1) {
+                            midRandom = shuffle(midLetters)
+                            for (var a=0; a<midRandom.length; a++) {
+                                word = word + midRandom[a]
+                            }
+                            word = word + wordSplit[x-1]
+                        }
+                    }
+                    outArray.push(word)
+                }
+        
+                var finalString = ""
+                for (var y=0; y<outArray.length; y++) {
+                    finalString += outArray[y] + " "
+                    
+                }
+                document.getElementById("output").value = finalString
+            }    
+        </script>
+    </head>
+</html>
+<body bgcolor="black">
+    <center>
+        <h1>Transposed Letter Effect</h1>
+        <p>A derivation of a psychology phenomenon known as the transposed letter effect (<a href="https://en.wikipedia.org/wiki/Transposed_letter_effect">Wikipedia</a>).</p>
+        <p>In this experiment all the middle letters of each word are randomly scrambled but the first and last letters remain the same.</p>
+        <textarea id="input">Click the button below to scramble the middle letters of the text. See if you are still able to understand.</textarea>
+        <br>
+        <textarea id="output"></textarea>
+        <br>
+        <input type="button" id="goBtn" value="Scramble" onclick="doScramble();"></input>
+    </center>
+</body>
+</html>
