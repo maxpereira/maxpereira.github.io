@@ -17,7 +17,7 @@ a:active { color: turquoise; }
         background-color: black;
         color: #FAF9F6;
     }
-    a:link,a:visited { color: rgb(111, 111, 238); }
+    a:link,a:visited { color: rgb(127, 127, 238); }
     a:hover { color: #f7056a; }
     a:active { color: turquoise; }
     #infmIcon { filter: invert(1); }
