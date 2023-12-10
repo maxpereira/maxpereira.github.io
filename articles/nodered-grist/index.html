@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title>Recording Values to a Spreadsheet with Node-RED and Grist | Max Pereira</title>
+	<link rel="icon" type="image/png" href="../../favicon.png">
+	<link rel="stylesheet" href="../../style.css">
+	<script type="text/javascript" src="../../common.js"></script>
+</head>
+<body>
+	<center>
+		<div id="bigbox">
+			<div id="content">
+				<img src="../../informatics.png" id="infmIcon" align="right" width="76" height="76" alt="Icon of a computer screen showing a graph structure" title="Source: MindWorlds on Flaticon">
+				<font id="name">Max Pereira</font>
+				<font id="subheading"><p>Recording Values to a Spreadsheet with Node-RED and Grist</p></font>
+				<hr>
+					<h3>Why?</h3>
+					<p>Sometimes it may be useful as part of a Node-RED flow to record a value in a spreadsheet. My personal use case was to track when I enabled or disabled the Do not Disturb focus mode on my iPhone to create a rough log of when I go to sleep and wake up.</p>
+					<hr>
+					<h3>Get Gristy with It</h3>
+					<p>To do this, I used a <a href="https://support.getgrist.com/self-managed/">self-hosted instance of Grist</a>, which I already use for other spreadsheet-related homelab tasks. Grist is a robust open source database/spreadsheet product billing itself as "the evolution of spreadsheets". It also has a very easy to use REST API which we will be leveraging in our Node-RED flow.</p>
+					<p>In this article I'm going to assume that you've already set up Grist and Node-RED and both services are able to talk to each other on the same network. Grist has comprehensive documentation on <a href="https://support.getgrist.com/self-managed/#how-do-i-install-grist">how to install it as a Docker container</a>, which is how I run it. After installation, you'll need to create an API key for your Grist account. You can do this by clicking on your profile icon in the top right of the Grist home page, and going to Profile Settings.</p><br>
+					<center><img src="apiKey.png" /></center><br>
+					<p>Once you have your API key, you'll need to get the unique identifier for both the document and table that you want to record values to. The easiest way that I found to do this is to click into the document in the Grist UI which will give you the document ID in the URL (the 12-character portion of the URL after /docs/). For the table ID you'll want to click into the Raw Data section in the bottom left of the Grist document view. That will show you the unique identifiers of all tables within the document. If you're like me and only use one table per document, the ID is probably "Table1". In the Grist table, make sure you name your columns something memorable that we can reference later on in the API call. To do this click on each column letter and type in a name.</p><br>
+					<center><img src="tableID.png" /></center><br>
+					<hr>
+					<h3>Being One with The Flow</h3>
+					<center><img src="flow.png" /></center><br>
+					<p>In my case the trigger for this flow is a state change of the Do not Disturb focus mode on my iPhone, detected by the Home Assistant iOS app. The time range node that comes next is purely because of my specific use case where I want to only capture in the spreadsheet the state changes where I'm presumably going to sleep or waking up.</p>
+					<p>The next three nodes transform the payload into a JSON object formatted to the Grist API specification. First I use a node called <a href="https://flows.nodered.org/node/node-red-contrib-simpletime">node-red-contrib-simpletime</a> to inject the current date and time as properties into the flow. This is important because in my spreadsheet I want to record the date and time that the event occured (and most likely so do you). Next is a change node which replaces instances of "on" and "off" in the message payload with "sleep" and "wake", since that is what the state changes represent and thus how I wanted it to appear in the spreadsheet.</p>
+					<center><img src="changeNodes.png" /></center><br>
+					<p>Next we need to formulate the payload into the JSON format that the Grist API expects. Check out the <a href="https://support.getgrist.com/api/#tag/records/operation/addRecords">Grist API docs for more details</a>. We use a change node to set the message payload to the below expression. The variables "myymd" and "mytimes" come from the simpletime node and represent the date and time of execution. The payload represents the state change of our input, which in our case would either be "sleep" or "wake". The keys "date", "time", and "state" can be any string but must match the names given to our columns in the Grist table.</p><br>
+					<center><img src="jsonNode.png" /></center><br>
+					<p>Lastly we use an http-request node to POST the data to the Grist API endpoint. The endpoint URL would be something like "http://[your Grist instance]:8484/api/docs/S5d8G2d5s8XC/tables/Table1/records". The only other options we need to configure here are the HTTP headers. The Authorization header should be set to "Bearer [your API key]" and the Content-Type header should be set to "application/json".</p><br>
+					<center><img src="httpNode.png" /></center><br>
+					<p>Now when the flow is triggered a row should be added to your Grist table! The above use case is purely the one that prompted me to investigate this, however as is the beauty of Node-RED, the flow can be modified an infinite number of ways to fit your use case. I'd love to hear what you build with this, and also what you thought of the article. It's my first attempt at putting something like this on "paper" and I'd be grateful for your feedback. The full generalized Node-RED flow is <a href="flow.json">available in JSON format here</a>.</p>
+					<i>(And yes, I do realize that someone has created <a href="https://flows.nodered.org/node/@gorootde/node-red-grist">node-red-grist</a> which probably does the same thing, but it's much more fun to make it yourself and learn something!)</i>
+				<hr>
+				<p>Published: December 10, 2023</p>
+				<hr>
+				<a href="/">← Back to Home</a>
+			</div>
+		</div>
+	</center>
+</body>
+</html>

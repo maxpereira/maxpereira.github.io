@@ -1,0 +1,167 @@
+[
+    {
+        "id": "d8780807d2fcb92b",
+        "type": "change",
+        "z": "1320c6e869549a21",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t  \"records\": [\t    {\t      \"fields\": {\t        \"date\": myymd,\t        \"time\": mytimes,\t        \"state\": payload\t      }\t    }\t  ]\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 780,
+        "wires": [
+            [
+                "2e1053f07fef4980"
+            ]
+        ]
+    },
+    {
+        "id": "2e1053f07fef4980",
+        "type": "http request",
+        "z": "1320c6e869549a21",
+        "name": "Grist Push",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "body",
+        "url": "http://[your Grist instance]:8484/api/docs/[your document ID]/tables/[your table ID]/records",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Authorization",
+                "valueType": "other",
+                "valueValue": "Bearer [your Grist API key]"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Content-Type",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "credentials": {
+            "user": "",
+            "password": ""
+        },
+        "x": 1110,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c19cc598679c13a1",
+        "type": "simpletime",
+        "z": "1320c6e869549a21",
+        "name": "",
+        "mydate": false,
+        "myymd": true,
+        "myyear": false,
+        "mymonth": false,
+        "mymonthn": false,
+        "mydom": false,
+        "mydoy": false,
+        "myday": false,
+        "myhourpm": false,
+        "myhour": false,
+        "mytime": false,
+        "mytimes": true,
+        "myminute": false,
+        "myminutes": false,
+        "mysecond": false,
+        "mymillis": false,
+        "myepoch": false,
+        "myrawdate": false,
+        "mypm": false,
+        "x": 530,
+        "y": 780,
+        "wires": [
+            [
+                "2e195d200e852fd5"
+            ]
+        ]
+    },
+    {
+        "id": "2e195d200e852fd5",
+        "type": "change",
+        "z": "1320c6e869549a21",
+        "name": "",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "on",
+                "fromt": "str",
+                "to": "activated",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "off",
+                "fromt": "str",
+                "to": "deactivated",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 780,
+        "wires": [
+            [
+                "d8780807d2fcb92b"
+            ]
+        ]
+    },
+    {
+        "id": "97517f00cf9013cb",
+        "type": "inject",
+        "z": "1320c6e869549a21",
+        "name": "your input",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "something",
+        "payloadType": "str",
+        "x": 360,
+        "y": 780,
+        "wires": [
+            [
+                "c19cc598679c13a1"
+            ]
+        ]
+    }
+]
