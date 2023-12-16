@@ -23,3 +23,7 @@ a:active { color: turquoise; }
     a:active { color: turquoise; }
     #infmIcon { filter: invert(1); }
 }
+
+code {
+    font-size: 12pt;
+  }
