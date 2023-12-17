@@ -4,6 +4,9 @@
 	<link rel="icon" type="image/png" href="../../favicon.png">
 	<link rel="stylesheet" href="../../style.css">
 	<script type="text/javascript" src="../../common.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+	<script>hljs.highlightAll();</script>
 </head>
 <body>
 	<center>
@@ -25,24 +28,23 @@
 					<p>Once you have your ESP32 development board in hand, it's time to flash the ESPresense firmware on to it. They've created a <a href="https://espresense.com/firmware">web-based flash utility</a> powered by another cool project called <a href="https://esphome.github.io/esp-web-tools/">esp-web-tools</a>. All you have to do is connect your board to a USB port on your computer and go through the guided flashing process. This went relatively smooth for me, the only issue I had is that when entering my WiFi credentials I kept getting a timeout in the web UI even though the board had successfully connected to my network.</p>
 					<hr>
 					<h3>MQTT and HomeAssistant</h3>
-					<p>Since this is the first element of my home automation system that operates using MQTT, I had to spin up an MQTT broker. I chose <a href="https://mosquitto.org/">Eclipse Mosquitto</a>, which is a popular open source choice. I followed <a href="https://github.com/sukesh-ak/setup-mosquitto-with-docker/blob/main/README.md">these instructions</a> to run it as a Docker container. Once your broker is running, you can configure the ESPresense settings by navigating to the IP of the development board in a browser. At a minimum you'll need to input the room name (in my case I used "home" because I don't have a need for per-room detection), the MQTT broker IP, and credentials. Next we want to enroll our device in the base station. Navigate in your browser to http://[dev board IP]/ui and click on Devices on the left hand menu. </p>
+					<p>Since this is the first element of my home automation system that operates using MQTT, I had to spin up an MQTT broker. I chose <a href="https://mosquitto.org/">Eclipse Mosquitto</a>, which is a popular open source choice. I followed <a href="https://github.com/sukesh-ak/setup-mosquitto-with-docker/blob/main/README.md">these instructions</a> to run it as a Docker container. Once your broker is running, you can configure the ESPresense settings by navigating to the IP of the development board in a browser. At a minimum you'll need to input the room name (in my case I used "home" because I don't have a need for per-room detection), the MQTT broker IP, and credentials. Next we want to enroll our device in the base station. Navigate in your browser to <code>http://[dev board IP]/ui</code> and click on Devices on the left hand menu. </p>
 					<center><img src="./enroll.png" /></center>
 					<p>Click the blue Enroll button and give your device a name. The flow will guide you through pairing your device over Bluetooth to capture the necessary information. After the enrollment is completed, the pairing can be deleted. Now ESPresense should automatically be publishing information about detected devices to its MQTT topic. I used another open source tool called <a href="https://mqtt-explorer.com/">MQTT Explorer</a></a> to see what kind of information was being collected by ESPresense.</p>
 					<center><img src="./explorer.png" /></center>
 					<p>ESPresense creates three MQTT subtopics: rooms, settings, and devices. In our case we only have one room called "home", but you can actually create several of these base stations and do per-room device detection, if you so desire. The settings subtopic contains information for enrolled devices, which in my case includes the one base station and my iPhone. The devices subtopic is updated in real time with all detected Bluetooth devices.</p>
-					<p>The last step to make this useful is to connect everything to HomeAssistant. First, <a href="https://www.home-assistant.io/integrations/mqtt/">add the MQTT integration</a> and enter your MQTT broker IP and credentials. Next, you'll need to create a sensor in HomeAssistant using the <a href="https://www.home-assistant.io/integrations/mqtt_room/">mqtt_room integration</a>. You can't do this through the web interface. In your HomeAssistant configuration.yml file, add the following section adapting to your specific device information:</p>
-					<code>
-						sensor:<br>
-						- platform: mqtt_room<br>
-						&emsp;&emsp;&emsp;&emsp;device_id: "max_s_iphone"<br>
-						&emsp;&emsp;&emsp;&emsp;name: "Max's iPhone MQTT"<br>
-						&emsp;&emsp;&emsp;&emsp;state_topic: "espresense/devices/max_s_iphone"<br>
-						&emsp;&emsp;&emsp;&emsp;timeout: 10<br>
-						&emsp;&emsp;&emsp;&emsp;away_timeout: 15
-					</code>
-					<p>The key points here are that device_id and state_topic should match your ESPresense device alias exactly. The name can be any string as you want it to appear in HomeAssistant. Timeout is really only important for multi-room detection and is optional. Away_timeout is also optional and controls the amount of seconds before the sensor state is set to not_home if no updates are received. Once you've updated your configuration.yml and restarted HomeAssistant, your new entity will be available to use:</p>
+					<p>The last step to make this useful is to connect everything to HomeAssistant. First, <a href="https://www.home-assistant.io/integrations/mqtt/">add the MQTT integration</a> and enter your MQTT broker IP and credentials. Next, you'll need to create a sensor in HomeAssistant using the <a href="https://www.home-assistant.io/integrations/mqtt_room/">mqtt_room integration</a>. You can't do this through the web interface. In your HomeAssistant <code>configuration.yml</code> file, add the following section adapting to your specific device information:</p>
+<pre><code class="theme-atom-one-dark language-yaml">sensor:
+- platform: mqtt_room
+    device_id: "max_s_iphone"
+    name: "Max's iPhone MQTT"
+    state_topic: "espresense/devices/max_s_iphone"
+    timeout: 10
+    away_timeout: 15
+</code></pre>
+					<p>The key points here are that device_id and state_topic should match your ESPresense device alias exactly. The name can be any string as you want it to appear in HomeAssistant. Timeout is really only important for multi-room detection and is optional. Away_timeout is also optional and controls the amount of seconds before the sensor state is set to not_home if no updates are received. Once you've updated your <code>configuration.yml</code> and restarted HomeAssistant, your new entity will be available to use:</p>
 					<center><img src="./entity.png" /></center>
-					<p>And that's it! Now that the entity exists within HomeAssistant, you can use it in your Node-RED flows or any other kind of automation by checking if the state is home or not_home. Hopefully you found the above useful, and I'd love to hear what kinds of automations you're building with ESPresense as well as any other comments you have.</p>
+					<p>And that's it! Now that the entity exists within HomeAssistant, you can use it in your Node-RED flows or any other kind of automation by checking if the state is <code>home</code> or <code>not_home</code>. Hopefully you found the above useful, and I'd love to hear what kinds of automations you're building with ESPresense as well as any other comments you have.</p>
 				<hr>
 				<p>Published: December 16, 2023</p>
 				<hr>
