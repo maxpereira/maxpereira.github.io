@@ -4,6 +4,9 @@
 	<link rel="icon" type="image/png" href="../../favicon.png">
 	<link rel="stylesheet" href="../../style.css">
 	<script type="text/javascript" src="../../common.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+	<script>hljs.highlightAll();</script>	
 </head>
 <body>
 	<center>
@@ -26,11 +29,21 @@
 					<h3>Being One with The Flow</h3>
 					<center><img src="flow.png" /></center><br>
 					<p>In my case the trigger for this flow is a state change of the Do not Disturb focus mode on my iPhone, detected by the Home Assistant iOS app. The time range node that comes next is purely because of my specific use case where I want to only capture in the spreadsheet the state changes where I'm presumably going to sleep or waking up.</p>
-					<p>The next three nodes transform the payload into a JSON object formatted to the Grist API specification. First I use a node called <a href="https://flows.nodered.org/node/node-red-contrib-simpletime">node-red-contrib-simpletime</a> to inject the current date and time as properties into the flow. This is important because in my spreadsheet I want to record the date and time that the event occured (and most likely so do you). Next is a change node which replaces instances of "on" and "off" in the message payload with "sleep" and "wake", since that is what the state changes represent and thus how I wanted it to appear in the spreadsheet.</p>
+					<p>The next three nodes transform the payload into a JSON object formatted to the Grist API specification. First I use a node called <a href="https://flows.nodered.org/node/node-red-contrib-simpletime">node-red-contrib-simpletime</a> to inject the current date and time as properties into the flow. This is important because in my spreadsheet I want to record the date and time that the event occured (and most likely so do you). Next is a change node which replaces instances of <code>on</code> and <code>off</code> in the message payload with <code>sleep</code> and <code>wake</code>, since that is what the state changes represent and thus how I wanted it to appear in the spreadsheet.</p>
 					<center><img src="changeNodes.png" /></center><br>
-					<p>Next we need to formulate the payload into the JSON format that the Grist API expects. Check out the <a href="https://support.getgrist.com/api/#tag/records/operation/addRecords">Grist API docs for more details</a>. We use a change node to set the message payload to the below expression. The variables "myymd" and "mytimes" come from the simpletime node and represent the date and time of execution. The payload represents the state change of our input, which in our case would either be "sleep" or "wake". The keys "date", "time", and "state" can be any string but must match the names given to our columns in the Grist table.</p><br>
-					<center><img src="jsonNode.png" /></center><br>
-					<p>Lastly we use an http-request node to POST the data to the Grist API endpoint. The endpoint URL would be something like "http://[your Grist instance]:8484/api/docs/S5d8G2d5s8XC/tables/Table1/records". The only other options we need to configure here are the HTTP headers. The Authorization header should be set to "Bearer [your API key]" and the Content-Type header should be set to "application/json".</p><br>
+					<p>Next we need to formulate the payload into the JSON format that the Grist API expects. Check out the <a href="https://support.getgrist.com/api/#tag/records/operation/addRecords">Grist API docs for more details</a>. We use a change node to set the message payload to the below expression. The variables <code>myymd</code> and <code>mytimes</code> come from the simpletime node and represent the date and time of execution. The payload represents the state change of our input, which in our case would either be <code>sleep</code> or <code>wake</code>. The keys <code>date</code>, <code>time</code>, and <code>state</code> can be any string but must match the names given to our columns in the Grist table.</p>
+<pre><code class="language-json">{
+    "records": [
+        {
+            "fields": {
+                "date": myymd,
+                "time": mytimes,
+                "state": payload
+            }
+        }
+    ]
+}</code></pre>
+					<p>Lastly we use an http-request node to POST the data to the Grist API endpoint. The endpoint URL would be something like <code>http://[your Grist instance]:8484/api/docs/S5d8G2d5s8XC/tables/Table1/records</code>. The only other options we need to configure here are the HTTP headers. The Authorization header should be set to <code>Bearer [your API key]</code> and the Content-Type header should be set to <code>application/json</code>.</p><br>
 					<center><img src="httpNode.png" /></center><br>
 					<p>Now when the flow is triggered a row should be added to your Grist table! The above use case is purely the one that prompted me to investigate this, however as is the beauty of Node-RED, the flow can be modified an infinite number of ways to fit your use case. I'd love to hear what you build with this, and also what you thought of the article. It's my first attempt at putting something like this on "paper" and I'd be grateful for your feedback. The full generalized Node-RED flow is <a href="flow.json">available in JSON format here</a>.</p>
 					<i>(And yes, I do realize that someone has created <a href="https://flows.nodered.org/node/@gorootde/node-red-grist">node-red-grist</a> which probably does the same thing, but it's much more fun to make it yourself and learn something!)</i>
