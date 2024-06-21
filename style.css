@@ -26,3 +26,13 @@ a:active { color: turquoise; }
 code {
     font-size: 13pt;
 }
+
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+table {
+	width: 100%;
+}
