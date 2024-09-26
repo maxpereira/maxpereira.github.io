@@ -6,36 +6,58 @@
 	<script type="text/javascript" src="common.js"></script>
 </head>
 <body>
-	<center>
-		<div id="content">
-			<img src="informatics.png" id="infmIcon" align="right" width="76" height="76" alt="Icon of a computer screen showing a graph structure" title="Source: MindWorlds on Flaticon">
-			<font id="name">Max Pereira</font>
-			<font id="subheading"><p>Informatics Professional</p></font>
-			<hr>
-			<img src="me.png" id="mePhoto" align="left" width="100" height="100" alt="A photo of me smiling with some green leafy trees in the background">
-			<font id="hello">Hello.</font>
-			<p>Welcome to my website. This site is meant to serve as a collection of information about me as well as various things that I find interesting. View my recent work experience and education on my <a href="https://linkedin.com/in/maxwellpereira">LinkedIn</a> profile.</p>
-			<hr>
-			<h3>Homelab</h3>
-			<p>The core of my homelab is a Proxmox hypervisor running several virtual machines hosting various services for personal use. The virtual machines are orchestrated with Terraform and configured with Ansible. Most services are running as Docker containers except OpenVPN which is running on a dedicated virtual machine.</p>
-			<a href="/articles/homelab/">Click for details →</a>
-			<hr>
-			<h3>Articles</h3>
+	<div id="particles-js"></div>
+		<center>
+			<div id="content">
+				<img src="informatics.png" id="infmIcon" align="right" width="76" height="76" alt="Icon of a computer screen showing a graph structure" title="Source: MindWorlds on Flaticon">
+				<font id="name">Max Pereira</font>
+				<font id="subheading"><p>Informatics Professional</p></font>
+				<hr>
+				<img src="me.png" id="mePhoto" align="left" width="100" height="100" alt="A photo of me smiling with some green leafy trees in the background">
+				<font id="hello">Hello.</font>
+				<p>Welcome to my website. This site is meant to serve as a collection of information about me as well as various things that I find interesting. View my recent work experience and education on my <a href="https://linkedin.com/in/maxwellpereira">LinkedIn</a> profile.</p>
+				<hr>
+				<h3>Homelab</h3>
+				<p>The core of my homelab is a Proxmox hypervisor running several virtual machines hosting various services for personal use. The virtual machines are orchestrated with Terraform and configured with Ansible. Most services are running as Docker containers except OpenVPN which is running on a dedicated virtual machine.</p>
+				<a href="/articles/homelab/">Click for details →</a>
+				<hr>
+				<h3>Articles</h3>
+					<ul>
+						<li><a href="/articles/presence-detection-espresense/">Simple Presence Detection with ESPresense</a></li>
+						<li><a href="/articles/nodered-grist/">Recording Values to a Spreadsheet with Node-RED and Grist</a></li>
+					</ul>
+				<hr>
+				<h3>Experiments</h3>
+				<p>Sometimes I get an idea that I can't get out of my head until I see it visualized. Usually these are little Javascript experiments to showcase some phenomenon or test some kind of theory. I like to share these in case someone else finds them interesting.</p>
 				<ul>
-					<li><a href="/articles/presence-detection-espresense/">Simple Presence Detection with ESPresense</a></li>
-					<li><a href="/articles/nodered-grist/">Recording Values to a Spreadsheet with Node-RED and Grist</a></li>
+					<li><a href="/experiments/yearclock/">Year Clock</a> - A clock that shows how much of the year has elapsed, instead of the day.</li>
+					<li><a href="/experiments/lln/">Law of Large Numbers</a> - Given enough trials, the actual ratio of outcomes converges on the expected ratio.</li>
+					<li><a href="/experiments/scramble/">Transposed Letter Effect</a> - Can you understand text with the middle letters of each word scrambled?</li>
 				</ul>
-			<hr>
-			<h3>Experiments</h3>
-			<p>Sometimes I get an idea that I can't get out of my head until I see it visualized. Usually these are little Javascript experiments to showcase some phenomenon or test some kind of theory. I like to share these in case someone else finds them interesting.</p>
-			<ul>
-				<li><a href="/experiments/yearclock/">Year Clock</a> - A clock that shows how much of the year has elapsed, instead of the day.</li>
-				<li><a href="/experiments/lln/">Law of Large Numbers</a> - Given enough trials, the actual ratio of outcomes converges on the expected ratio.</li>
-				<li><a href="/experiments/scramble/">Transposed Letter Effect</a> - Can you understand text with the middle letters of each word scrambled?</li>
-			</ul>
-			<hr>
-			<i>Want to get in touch? Contact me <a href="https://linkedin.com/in/maxwellpereira">via LinkedIn</a>. If desired, here is <a href="MaxPereira_PGPKey.txt">my PGP Public Key</a>.</i>
-		</div>
-	</center>
+				<hr>
+				<i>Want to get in touch? Contact me <a href="https://linkedin.com/in/maxwellpereira">via LinkedIn</a>. If desired, here is <a href="MaxPereira_PGPKey.txt">my PGP Public Key</a>.</i>
+			</div>
+		</center>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80, density: { enable: true, value_area: 800 } },
+                color: { value: "#333333" },
+                shape: { type: "circle" },
+                opacity: { value: 0.4, random: false },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#444444", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 0.1, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: { onhover: { enable: false, mode: "repulse" }, onclick: { enable: false, mode: "push" }, resize: true },
+                modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
+            },
+            retina_detect: true
+        });
+    </script>
 </body>
 </html>
